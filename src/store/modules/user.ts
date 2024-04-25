@@ -2,8 +2,8 @@
 
 // 创建用户相关的仓库
 import { defineStore } from 'pinia'
-import { AdminLoginByPwParams, LoginByPwRes } from '@/api/user/type'
-import { reqAdminLoginByPw } from '@/api/user'
+import { AdminLoginByPwParams, LoginByPwRes, QueryUserDetailByNameRes, UserDetail } from '@/api/user/type'
+import { queryAdminLoginByPw, queryUserDetailByName } from '@/api/user'
 import { GET_TOKEN, SET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 import { UserState } from './type/type'
 import { constantRoute } from '@/router/router'
@@ -22,8 +22,8 @@ const useUserStore = defineStore('UserStore', {
   // 处理异步|逻辑地方
   actions: {
     // 用户登录
-    async userLoginAction(data: AdminLoginByPwParams) {
-      const result: LoginByPwRes = await reqAdminLoginByPw(data)
+    async userLoginAction(params: AdminLoginByPwParams) {
+      const result: LoginByPwRes = await queryAdminLoginByPw(params)
 
       if (result.code === 200) {
         this.token = result.data as string
@@ -35,14 +35,13 @@ const useUserStore = defineStore('UserStore', {
       }
     },
     // 获取用户信息
-    // async userInfoAction() {
-    //   const result = await reqUserInfo()
-    //   if (result.code === 200) {
-    //     this.username = result.data.checkUser.username
-    //     this.avatar = result.data.checkUser.avatar
-    //   }
-    //   console.log(result)
-    // },
+    async userInfoAction(username: string) {
+      const result: QueryUserDetailByNameRes = await queryUserDetailByName(username)
+      if (result.code === 200) {
+        this.username = result.data.username
+        //this.avatar = result.data.avatar
+      }
+    },
     // 退出登录
     userLogoutAction() {
       //当前没有mock接口（不做）：服务器数据token失效

@@ -18,6 +18,7 @@ router.beforeEach(async (to: any, from: any, next: any) => {
   document.title = `${setting.title}-${to.meta.title}`
   //访问某一个路由之前的守卫
   nprogress.start()
+  debugger
   //获取token，去判断用户登录、还是未登录
   const token = userStore.token
   //获取用户名字
@@ -29,22 +30,16 @@ router.beforeEach(async (to: any, from: any, next: any) => {
       next('/home')
     } else {
       //登陆成功访问其余的，放行
-      //有用户信息
-      if (username) {
-        //放行
+      //如果没有用户信息，在收尾这里发请求获取到了用户信息再放行
+      try {
+        //获取用户信息
+        await userStore.userInfoAction(username)
         next()
-      } else {
-        //如果没有用户信息，在收尾这里发请求获取到了用户信息再放行
-        try {
-          //获取用户信息
-          await userStore.userInfoAction()
-          next()
-        } catch (error) {
-          //token过期|用户手动处理token
-          //退出登陆->用户相关的数据清空
-          userStore.userLogoutAction()
-          next({ path: '/login', query: { redirect: to.path } })
-        }
+      } catch (error) {
+        //token过期|用户手动处理token
+        //退出登陆->用户相关的数据清空
+        userStore.userLogoutAction()
+        next({ path: '/login', query: { redirect: to.path } })
       }
     }
   } else {

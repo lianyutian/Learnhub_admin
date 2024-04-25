@@ -3,37 +3,18 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form
-          class="login_form"
-          :rules="rules"
-          :model="loginForm"
-          ref="loginFormRef"
-        >
+        <el-form class="login_form" :rules="rules" :model="loginForm" ref="loginFormRef">
           <h1>Hello</h1>
           <h2>欢迎来到知学云</h2>
           <el-form-item prop="username">
-            <el-input
-              :prefix-icon="User"
-              v-model="loginForm.username"
-            ></el-input>
+            <el-input :prefix-icon="User" v-model="loginForm.username"></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input
-              type="password"
-              :prefix-icon="Lock"
-              v-model="loginForm.password"
-              show-password
-            ></el-input>
+            <el-input type="password" :prefix-icon="Lock" v-model="loginForm.password" show-password></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button
-              :loading="loadType"
-              class="login_btn"
-              type="primary"
-              size="default"
-              @click="login"
-              @keydown.enter="logins"
-            >
+            <el-button :loading="loadType" class="login_btn" type="primary" size="default" @click="login"
+              @keydown.enter="logins">
               登录
             </el-button>
           </el-form-item>
@@ -55,7 +36,7 @@ import { getTime } from '@/utils/time'
 let loadType = ref(false)
 //收集账号与密码数据
 let loginForm = reactive({
-  username: '13800010004',
+  username: 'lisi',
   password: '123456',
   type: 1,
 })
@@ -65,10 +46,10 @@ const validatorUserName = (_rule: any, value: any, callback: any) => {
   //rule：校验规则对象
   //value:表单元素文本内容
   //callback:符合条件，callback放行通过，不符合：注入错误提示信息
-  if (value.length >= 5) {
+  if (value.length >= 2) {
     callback()
   } else {
-    callback(new Error('账号长度至少5位'))
+    callback(new Error('账号长度至少2位'))
   }
 }
 const validatorPassword = (_rule: any, value: any, callback: any) => {
@@ -84,9 +65,9 @@ const rules = {
     //规则对象属性:
     {
       required: true, // required,代表这个字段务必要校验的
-      min: 5, //min:文本长度至少多少位
+      min: 2, //min:文本长度至少多少位
       max: 11, // max:文本长度最多多少位
-      message: '长度应为6-11位', // message:错误的提示信息
+      message: '长度应为2-11位', // message:错误的提示信息
       trigger: 'change', //trigger:触发校验表单的时机 change->文本发生变化触发校验, blur:失去焦点的时候触发校验规则
     },
     { validator: validatorUserName, trigger: 'change' },
@@ -145,6 +126,7 @@ const logins = () => {
   height: 100vh;
   background: url('@/assets/images/background.jpg') no-repeat;
   background-size: cover;
+
   .login_form {
     position: relative;
     width: 80%;
@@ -152,15 +134,18 @@ const logins = () => {
     background: url('@/assets/images/login_form.png') no-repeat;
     background-size: cover;
     padding: 40px;
+
     h1 {
       color: white;
       font-size: 40px;
     }
+
     h2 {
       color: white;
       font-size: 20px;
       margin: 20px 0px;
     }
+
     .login_btn {
       width: 100%;
     }

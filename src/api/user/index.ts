@@ -1,10 +1,11 @@
 // 同一管理用户相关的接口
 import request from '@/utils/request'
-import { AdminLoginByPwParams, LoginByPwRes } from './type'
+import { AdminLoginByPwParams, LoginByPwRes, QueryUserDetailByNameRes, UserDetail } from './type'
 
 // 统一管理API
 enum API {
   ADMIN_LOGIN_URL = '/as/accounts/admin/login',
+  ADMIN_USER_DETAIL_URL = '/us/user/queryUserDetailByName',
 }
 
 /**
@@ -18,5 +19,16 @@ enum API {
  * @param {boolean} params.rememberMe 7天免密登录
  * @returns
  */
-export const reqAdminLoginByPw = (params: AdminLoginByPwParams) =>
+export const queryAdminLoginByPw = (params: AdminLoginByPwParams) =>
   request.post<any, LoginByPwRes>(API.ADMIN_LOGIN_URL, params)
+
+/** 
+ * 根据用户名查询用户信息
+ * 
+ * @param {string} username 用户名
+ * @returns 用户信息
+ */
+export const queryUserDetailByName = (username: string) =>
+  request.post<any, QueryUserDetailByNameRes>(
+    API.ADMIN_USER_DETAIL_URL + `?username=${username}`,
+  )
