@@ -2,7 +2,12 @@
 
 // 创建用户相关的仓库
 import { defineStore } from 'pinia'
-import { AdminLoginByPwParams, LoginByPwRes, QueryUserDetailByNameRes, UserDetail } from '@/api/user/type'
+import {
+  AdminLoginByPwParams,
+  LoginByPwRes,
+  QueryUserDetailByNameRes,
+  UserDetail,
+} from '@/api/user/type'
 import { queryAdminLoginByPw, queryUserDetailByName } from '@/api/user'
 import { GET_TOKEN, SET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 import { UserState } from './type/type'
@@ -36,7 +41,8 @@ const useUserStore = defineStore('UserStore', {
     },
     // 获取用户信息
     async userInfoAction(username: string) {
-      const result: QueryUserDetailByNameRes = await queryUserDetailByName(username)
+      const result: QueryUserDetailByNameRes =
+        await queryUserDetailByName(username)
       if (result.code === 200) {
         this.username = result.data.username
         //this.avatar = result.data.avatar

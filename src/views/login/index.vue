@@ -3,18 +3,37 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login_form" :rules="rules" :model="loginForm" ref="loginFormRef">
+        <el-form
+          class="login_form"
+          :rules="rules"
+          :model="loginForm"
+          ref="loginFormRef"
+        >
           <h1>Hello</h1>
           <h2>欢迎来到知学云</h2>
           <el-form-item prop="username">
-            <el-input :prefix-icon="User" v-model="loginForm.username"></el-input>
+            <el-input
+              :prefix-icon="User"
+              v-model="loginForm.username"
+            ></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input type="password" :prefix-icon="Lock" v-model="loginForm.password" show-password></el-input>
+            <el-input
+              type="password"
+              :prefix-icon="Lock"
+              v-model="loginForm.password"
+              show-password
+            ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button :loading="loadType" class="login_btn" type="primary" size="default" @click="login"
-              @keydown.enter="logins">
+            <el-button
+              :loading="loadType"
+              class="login_btn"
+              type="primary"
+              size="default"
+              @click="login"
+              @keydown.enter="logins"
+            >
               登录
             </el-button>
           </el-form-item>

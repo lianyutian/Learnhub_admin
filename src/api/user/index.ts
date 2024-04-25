@@ -1,6 +1,11 @@
 // 同一管理用户相关的接口
 import request from '@/utils/request'
-import { AdminLoginByPwParams, LoginByPwRes, QueryUserDetailByNameRes, UserDetail } from './type'
+import {
+  AdminLoginByPwParams,
+  LoginByPwRes,
+  QueryUserDetailByNameRes,
+  UserDetail,
+} from './type'
 
 // 统一管理API
 enum API {
@@ -22,9 +27,9 @@ enum API {
 export const queryAdminLoginByPw = (params: AdminLoginByPwParams) =>
   request.post<any, LoginByPwRes>(API.ADMIN_LOGIN_URL, params)
 
-/** 
+/**
  * 根据用户名查询用户信息
- * 
+ *
  * @param {string} username 用户名
  * @returns 用户信息
  */
