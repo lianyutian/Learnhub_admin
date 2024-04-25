@@ -1,35 +1,23 @@
-// 登录接口需要携带参数ts类型
-export interface loginForm {
-  username: string
+import { BaseRes } from '../type'
+
+// 参数接口
+export interface AdminLoginByPwParams {
+  /*登录方式：1-密码登录; 2-验证码登录 */
+  type: number
+
+  /*用户名 */
+  username?: string
+
+  /*手机号 */
+  cellPhone?: string
+
+  /*密码 */
   password: string
+
+  /*7天免密登录 */
+  rememberMe?: boolean
 }
 
-export interface dataType {
-  token?: string
-  message?: string
-}
-// 登录接口返回数据类型
-export interface loginResponseData {
-  code: number
-  data: dataType
-}
-
-interface userInfo {
-  userId: number
-  avatar: string
-  username: string
-  password: string
-  desc: string
-  roles: string[]
-  buttons: string[]
-  routes: string[]
-  token: string
-}
-interface user {
-  checkUser: userInfo
-}
-// 定义服务器返回用户信息相关的数据类型
-export interface userResponseData {
-  code: number
-  data: user
+export interface LoginByPwRes extends BaseRes {
+  data: string
 }

@@ -10,7 +10,7 @@
           ref="loginFormRef"
         >
           <h1>Hello</h1>
-          <h2>欢迎来到XXX</h2>
+          <h2>欢迎来到知学云</h2>
           <el-form-item prop="username">
             <el-input
               :prefix-icon="User"
@@ -54,7 +54,11 @@ import { getTime } from '@/utils/time'
 // 登录效果
 let loadType = ref(false)
 //收集账号与密码数据
-let loginForm = reactive({ username: 'admin', password: '111111' })
+let loginForm = reactive({
+  username: '13800010004',
+  password: '123456',
+  type: 1,
+})
 
 //自定义校验规则函数
 const validatorUserName = (_rule: any, value: any, callback: any) => {
@@ -81,8 +85,8 @@ const rules = {
     {
       required: true, // required,代表这个字段务必要校验的
       min: 5, //min:文本长度至少多少位
-      max: 10, // max:文本长度最多多少位
-      message: '长度应为6-10位', // message:错误的提示信息
+      max: 11, // max:文本长度最多多少位
+      message: '长度应为6-11位', // message:错误的提示信息
       trigger: 'change', //trigger:触发校验表单的时机 change->文本发生变化触发校验, blur:失去焦点的时候触发校验规则
     },
     { validator: validatorUserName, trigger: 'change' },
