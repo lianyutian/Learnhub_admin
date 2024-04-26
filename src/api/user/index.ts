@@ -4,13 +4,12 @@ import {
   AdminLoginByPwParams,
   LoginByPwRes,
   QueryUserDetailByNameRes,
-  UserDetail,
 } from './type'
 
 // 统一管理API
 enum API {
   ADMIN_LOGIN_URL = '/as/accounts/admin/login',
-  ADMIN_USER_DETAIL_URL = '/us/user/queryUserDetailByName',
+  ADMIN_USER_DETAIL_URL = '/us/user/me',
 }
 
 /**
@@ -30,10 +29,7 @@ export const queryAdminLoginByPw = (params: AdminLoginByPwParams) =>
 /**
  * 根据用户名查询用户信息
  *
- * @param {string} username 用户名
  * @returns 用户信息
  */
-export const queryUserDetailByName = (username: string) =>
-  request.post<any, QueryUserDetailByNameRes>(
-    API.ADMIN_USER_DETAIL_URL + `?username=${username}`,
-  )
+export const queryMe = () =>
+  request.get<any, QueryUserDetailByNameRes>(API.ADMIN_USER_DETAIL_URL)

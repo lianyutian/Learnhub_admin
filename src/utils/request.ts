@@ -12,7 +12,7 @@ request.interceptors.request.use((config) => {
   //获取用户相关的小仓库，获取token，登录成功以后携带个i服务器
   const userStore = useUserStore()
   if (userStore.token) {
-    config.headers.token = userStore.token
+    config.headers.authorization = userStore.token
   }
   //config配置对象，headers请求头，经常给服务器端携带公共参数
   //返回配置对象

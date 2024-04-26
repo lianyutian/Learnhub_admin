@@ -23,33 +23,18 @@ export interface LoginByPwRes extends BaseRes {
 }
 
 // 响应接口
-export interface UserDetail {
+export interface MeRes {
   /*用户id */
   id: number
 
-  /*手机 */
-  cellPhone: string
-
-  /*用户名称/昵称 */
+  /*名字 */
   name: string
-
-  /*用户类型，1-其他员工,2-普通学员，3-老师 */
-  type: number
-
-  /*角色id，老师和学生不用填 */
-  roleId: number
 
   /*头像 */
   icon: string
 
-  /*岗位 */
-  job: string
-
-  /*个人介绍 */
-  intro: string
-
-  /*形象照地址 */
-  photo: string
+  /*手机号 */
+  cellPhone: string
 
   /*用户名 */
   username: string
@@ -59,6 +44,9 @@ export interface UserDetail {
 
   /*QQ号码 */
   qq: string
+
+  /*个人介绍 */
+  intro: string
 
   /*省 */
   province: string
@@ -71,8 +59,14 @@ export interface UserDetail {
 
   /*性别：0-男性，1-女性 */
   gender: number
+
+  /*注册时间 */
+  createTime: Record<string, unknown>
+
+  /*角色名称 */
+  roleName: string
 }
 
-export interface QueryUserDetailByNameRes extends BaseRes {
-  data: UserDetail
+export interface QueryMeRes extends BaseRes {
+  data: MeRes
 }
